@@ -58,5 +58,4 @@ Task 10: The exfiltration archive file is C:\users\steve\Pictures\a.zip or BagMR
 
 This is a manual approach. There are tools that can specifically target ShellBags when analyzing Registry, such as RegRipper and TZWorks sbag.
 
-Much, if not all, of knowledge from this article came from the brilliant blogs (
-Shellbags Forensics: Addressing a Misconception (interpretation, step-by-step testing, new findings, and more)[https://www.4n6k.com/2013/12/shellbags-forensics-addressing.html] by 4n6k and (Windows Shell Item format specification)[https://github.com/libyal/libfwsi/blob/main/documentation/Windows%20Shell%20Item%20format.asciidoc#windows-shell-item-format-specification] by Joachim Metz
+Much, if not all, of knowledge from this article came from the brilliant blogs [Shellbags Forensics: Addressing a Misconception (interpretation, step-by-step testing, new findings, and more)](https://www.4n6k.com/2013/12/shellbags-forensics-addressing.html) by 4n6k and [Windows Shell Item format specification](https://github.com/libyal/libfwsi/blob/main/documentation/Windows%20Shell%20Item%20format.asciidoc#windows-shell-item-format-specification) by Joachim Metz
