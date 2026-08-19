@@ -1,7 +1,8 @@
-SHellbag: everytime a folder is accessed, the register records the interaction.
+**Shellbag:** everytime a folder is accessed, the register records the interaction.
 
-full path to the folder, the timestamps associated with it, and your display preferences like whether you were viewing files as a list, as tiles, or sorted by date
-Keys:
+Records include full path to the folder, the timestamps associated with it, and your display preferences like whether you were viewing files as a list, as tiles, or sorted by date.
+
+**Important Keys:**
 - Bags: view the settings
 - BagMRU:  folder paths and hierarchy, essentially a tree of every directory the user navigated into
 
@@ -10,7 +11,7 @@ USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\Bags
 NTUSER.DAT\Software\Microsoft\Windows\Shell\BagMRU
 NTUSER.DAT\Software\Microsoft\Windows\Shell\Bags
 
-Tool: RegistryExplorer by Eric Zimmerman
+**Tool:** RegistryExplorer by Eric Zimmerman
 
 The files we want to look closely at are UsrClass.dat of users 'steve' and 'admin', since those are where the most useful artifacts at.
 
@@ -23,9 +24,12 @@ Under **BagMRU** there are accessed folders recorded as numbers: 0,1,2,3,etc. Th
 From these three mapping methods, we can map out the last accessed folders by Admin and Steve.
 I won't include the mapped result since anyone interested can map on their own.
 
-Another key to pay attention to in BagMRU is MRUListEx. It contains the most recently accessed directories, each recorded in 4 bytes. For example, MRUListEx has binaries 01-00-00-00-00-00-00-00-03-00-00-00-02-00-00-00-FF-FF-FF-FF means that the most recently accessed directory is the subkey 1, second most recent is 0, then 3, and the earliest accessed is 2. Use the mapping result from above to enrich the decoded result.
+Another key to pay attention to in **BagMRU** is **MRUListEx**. It contains the most recently accessed directories, each recorded in 4 bytes. 
+For example, MRUListEx has binaries 01-00-00-00-00-00-00-00-03-00-00-00-02-00-00-00-FF-FF-FF-FF means that the most recently accessed directory is the subkey 1, second most recent is 0, then 3, and the earliest accessed is 2. Use the mapping result from above to enrich the decoded result.
+
 MRUListEx acts like a stack. In this example, when directory 2 was first accessed, its value is 02-00-00-00-FF-FF-FF-FF. Then directory 0 was accessed, and the key was written into 00-00-00-00-02-00-00-00-FF-FF-FF-FF. So, by looking up the LastWrite timestep of the registry key containing the MRUListEx, we can deduct the time that one of its subfolder was last accessed.
-For example: BagMRU\0\1\0 was last written at 2021-09-04 11:34:21, has subkeys 0,1,2,3, and MRUListEx is 01-00-00-00-02-00-00-00-FF-FF-FF-FF. It means MRUListEx was last updated at that timestamp. Since 1 was the most recently accessed folder, it means that BagMRU\0\1\0\1 was last accessed at that timestamp.
+
+**For example:** BagMRU\0\1\0 was last written at 2021-09-04 11:34:21, has subkeys 0,1,2,3, and MRUListEx is 01-00-00-00-02-00-00-00-FF-FF-FF-FF. It means MRUListEx was last updated at that timestamp. Since 1 was the most recently accessed folder, it means that BagMRU\0\1\0\1 was last accessed at that timestamp.
 
 Below are the answer to HTB Sherlocks Baggage:
 
